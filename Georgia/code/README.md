@@ -20,6 +20,8 @@ The following is a list of the scripts in the folder /code, by order of use
     Uses partisanship to generate figures showing packing and cracking
 - [make_demograpghic_graphs_GA.py](https://github.com/hwheelen/PGP_RapidResponse/blob/master/Georgia/code/make_demographic_graphs_GA.py)
     Uses demographic information to generate figures showing packing and cracking
+- [prep_gerrychain_GA.py](https://github.com/hwheelen/PGP_RapidResponse/blob/master/Georgia/code/prep_gerrychain_GA.py)
+    Combines 2016 and 2018 election data, aggregates population into precincts, and then interpolates district labels
 
 
 ## Data

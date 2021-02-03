@@ -7,6 +7,9 @@ import matplotlib
 #set paths for different shapefiles
 prec_16 = gpd.read_file('/Volumes/GoogleDrive/Shared drives/princeton_gerrymandering_project/OpenPrecincts/States for site/Georgia/2016/VEST/ga_2016/ga_2016.shp')
 prec_18 = gpd.read_file('/Volumes/GoogleDrive/Shared drives/princeton_gerrymandering_project/OpenPrecincts/States for site/Georgia/2018 Precincts/GA2018PrecElecs.shp')
+prec_20 = gpd.read_file('/Users/hwheelen/Desktop/GA Precincts/ga_2020/ga_2020.shp')
+prec_20['geometry'] = prec_20.geometry.buffer(0)
+prec_20.to_file('/Users/hwheelen/Desktop/GA Precincts/ga_2020/ga_2020.shp')
 
 sen = gpd.read_file('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/shapefiles/SENATE14/with census data/GA_Senate_Map_demo_breakdown.shp')
 sen12 = gpd.read_file('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/shapefiles/SENATE12/with census data/GA_Senate12_Map_demo_breakdown.shp')
@@ -15,7 +18,7 @@ cong = gpd.read_file('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia
 
 
 #make list of maps to work on
-maps = [sen, sen12, house, cong, prec_18]
+maps = [sen, sen12, house, cong, prec_18, prec_20]
 
 #set district maps to same crs as blocks
 for map in maps:
@@ -23,24 +26,32 @@ for map in maps:
 
 #make list of election columns we want to aggregate from the precincts to the districts
 cols16 = ['G16PREDCli', 'G16PRELJoh', 'G16PRERTru', 'G16USSDBar', 'G16USSLBuc','G16USSRIsa', 'G16PSCLHos', 'G16PSCREch']
-cols18  =['G18DATG', 'G18DCmAg','G18DCmIns', 'G18DCmLab', 'G18DGOV', 'G18DLTG', 'G18DPbSrv', 'G18DSOS','G18DSchSpr', 'G18DStSen', 
+cols18 = ['G18DATG', 'G18DCmAg','G18DCmIns', 'G18DCmLab', 'G18DGOV', 'G18DLTG', 'G18DPbSrv', 'G18DSOS','G18DSchSpr', 'G18DStSen', 
           'G18LCmIns', 'G18LGOV', 'G18LPbSrv','G18LSOS', 'G18RATG', 'G18RCmAg', 'G18RCmIns', 'G18RCmLab', 'G18RGOV','G18RLTG', 'G18RPbSrv', 'G18RSOS', 'G18RSchSpr', 'G18RStSen']
+cols20 = ['G20PRERTRU', 'G20PREDBID','G20PRELJOR', 'C20PRERTRU', 'C20PREDBID', 'C20PRELJOR', 'G20USSRPER','G20USSDOSS', 'G20USSLHAZ', 'S20USSRLOE', 'S20USSRCOL', 'S20USSRGRA',
+          'S20USSRJAC', 'S20USSRTAY', 'S20USSRJOH', 'S20USSDWAR', 'S20USSDJAC','S20USSDLIE', 'S20USSDJOH', 'S20USSDJAM', 'S20USSDSLA', 'S20USSDWIN','S20USSDTAR', 'S20USSLSLO', 
+          'S20USSGFOR', 'S20USSIBUC', 'S20USSIBAR','S20USSISTO', 'S20USSIGRE', 'G20PSCRSHA', 'G20PSCDBRY', 'G20PSCLMEL','G20PSCRMCD', 'G20PSCDBLA', 'G20PSCLWIL']
 
 prec_16[cols16] = prec_16[cols16].astype(float)
 prec_18[cols18] = prec_18[cols18].astype(float)
+prec_20[cols20] = prec_20[cols20].astype(float)
 
 #run aggregate function that does spatial aggregation
 aggregated_sen = ai.aggregate(prec_16,sen, source_columns=cols16)[1]
 aggregated_sen = ai.aggregate(prec_18,aggregated_sen, source_columns=cols18)[1] 
+aggregated_sen = ai.aggregate(prec_20,aggregated_sen, source_columns=cols20)[1] 
 
 aggregated_sen12 = ai.aggregate(prec_16,sen12, source_columns=cols16)[1]
 aggregated_sen12 = ai.aggregate(prec_18,aggregated_sen12, source_columns=cols18)[1]
+aggregated_sen12 = ai.aggregate(prec_20,aggregated_sen12, source_columns=cols20)[1]
 
 aggregated_house = ai.aggregate(prec_16,house, source_columns=cols16)[1]
 aggregated_house = ai.aggregate(prec_18,aggregated_house, source_columns=cols18)[1]
+aggregated_house = ai.aggregate(prec_20,aggregated_house, source_columns=cols20)[1]
 
 aggregated_cong = ai.aggregate(prec_16,cong, source_columns=cols16)[1]
 aggregated_cong = ai.aggregate(prec_18,aggregated_cong, source_columns=cols18)[1]
+aggregated_cong = ai.aggregate(prec_20,aggregated_cong, source_columns=cols20)[1]
 
 
 #check that totals match
