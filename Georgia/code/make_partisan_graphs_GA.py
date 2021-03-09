@@ -9,11 +9,10 @@ sen12 = pd.read_csv('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/
 house = pd.read_csv('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Data/GA_State_House_Map_estimates.csv')
 cong = pd.read_csv('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Data/GA_Congressional_Map_estimates.csv')
 
-measure = 'G18DGOV'
-add = 'G18RGOV'
+measure = 'G20PREDBID'
+add = 'G20PRERTRU'
 
-
-# senate12 figure-------------------------------------------------------------------
+# senate figure-------------------------------------------------------------------
 sen['prop'] = (sen[measure]/((sen[measure].astype(int) + sen[add].astype(int)))*100)
 
 sen['rank'] = sen['prop'].rank(ascending=True)
@@ -38,8 +37,8 @@ for i in range(len(x)):
     # plotting the corresponding x with y  
     # and respective color 
     ax.scatter(x[i], y[i], c = col[i], s = 30 )
-ax.axhspan(45, 55, alpha=0.25, color='yellow')
-ax.set_ylabel('Proportion Democratic Votes (Gov 2018)')
+ax.axhspan(40, 60, alpha=0.25, color='yellow')
+ax.set_ylabel('Proportion Democratic Votes (President 2020)')
 ax.set_ylim(-2,max(y)+2)
 ax.set_xlabel('Rank (least to most Democratic)')
 ax.set_xlim(0,max(x)+2)
@@ -49,7 +48,7 @@ ax.set_title('Georgia State Senate, Enacted Map')
 #plt.xticks(np.arange(1, 34, step=4))
 #plt.yticks(np.arange(0, 105, step=10))
 
-fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_Senate_Enacted_Gov18.pdf')
+fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_Senate_Enacted_Pres20.pdf')
 
 # senate12 figure--------------------------------------------------------------------------------------------------------
 sen12['prop'] = (sen12[measure]/((sen12[measure].astype(int) + sen12[add].astype(int)))*100)
@@ -75,8 +74,8 @@ for i in range(len(x)):
     # plotting the corresponding x with y  
     # and respective color 
     ax.scatter(x[i], y[i], c = col[i], s = 30 )
-ax.axhspan(45, 55, alpha=0.25, color='yellow')
-ax.set_ylabel('Proportion Democratic Votes (Gov 2018)')
+ax.axhspan(40, 60, alpha=0.25, color='yellow')
+ax.set_ylabel('Proportion Democratic Votes (President 2020)')
 ax.set_ylim(-2,max(y)+2)
 ax.set_xlabel('Rank (least to most Democratic)')
 ax.set_xlim(0,max(x)+2)
@@ -86,7 +85,7 @@ ax.set_title('Georgia State Senate, 2012 Map')
 #plt.xticks(np.arange(1, 34, step=4))
 #plt.yticks(np.arange(0, 105, step=10))
 
-fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_Senate_2012_Gov18.pdf')
+fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_Senate_2012_Pres20.pdf')
 
 # house figure--------------------------------------------------------------------------------------------------------
 house['prop'] = (house[measure]/((house[measure].astype(int) + house[add].astype(int)))*100)
@@ -112,8 +111,8 @@ for i in range(len(x)):
     # plotting the corresponding x with y  
     # and respective color 
     ax.scatter(x[i], y[i], c = col[i], s = 30 )
-ax.axhspan(45, 55, alpha=0.25, color='yellow')
-ax.set_ylabel('Proportion Democratic Votes (Gov 2018)')
+ax.axhspan(40, 60, alpha=0.25, color='yellow')
+ax.set_ylabel('Proportion Democratic Votes (President 2020)')
 ax.set_ylim(-2,max(y)+2)
 ax.set_xlabel('Rank (least to most Democratic)')
 ax.set_xlim(0,max(x)+2)
@@ -123,7 +122,7 @@ ax.set_title('Georgia State House, Enacted Map')
 #plt.xticks(np.arange(1, 34, step=4))
 #plt.yticks(np.arange(0, 105, step=10))
 
-fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_House_Enacted_Gov18.pdf')
+fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_House_Enacted_Pres20.pdf')
 
 #congressional figure--------------------------------------------------------------------------------------------------------
 cong['prop'] = (cong[measure]/((cong[measure].astype(int) + cong[add].astype(int)))*100)
@@ -149,8 +148,8 @@ for i in range(len(x)):
     # plotting the corresponding x with y  
     # and respective color 
     ax.scatter(x[i], y[i], c = col[i], s = 30 )
-ax.axhspan(45, 55, alpha=0.25, color='yellow')
-ax.set_ylabel('Proportion Democratic Votes (Gov 2018)')
+ax.axhspan(40, 60, alpha=0.25, color='yellow')
+ax.set_ylabel('Proportion Democratic Votes (President 2020)')
 ax.set_ylim(-2,max(y)+2)
 ax.set_xlabel('Rank (least to most Democratic)')
 ax.set_xlim(0,max(x)+2)
@@ -160,4 +159,4 @@ ax.set_title('US Congress, Enacted Map')
 #plt.xticks(np.arange(1, 34, step=4))
 #plt.yticks(np.arange(0, 105, step=10))
 
-fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_Congressional_Enacted_Gov18.pdf')
+fig.savefig('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/Figures/GA_Congressional_Enacted_Pres20.pdf')

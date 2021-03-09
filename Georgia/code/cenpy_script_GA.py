@@ -8,11 +8,11 @@ conn = c.base.Connection('DECENNIALSF12010')
 data = pd.DataFrame(columns=['P005001','P005003','P005004','P005010','P011001','P011005','P011006','P011007','P011008','P011002', 'state', 'county', 'tract', 'block'])
 
 #specifiy which state and counties you want to pull information from and what counties
-state = '13' # 13 is GA's state FIPS code
+state = '36' # 13 is GA's state FIPS code
 counties = []
-y = [41, 203] #skipped county numbers
+y = [] #skipped county numbers
 
-for i in range(1,323,2): # GA's counties range from 001 to 321 skipping even numbers and numbers in the list y
+for i in range(1,125,2): # NY's counties range from 001 to 123 skipping even numbers and numbers in the list y
     if i not in y:
         x = str(i).zfill(3)
         counties.append(x)
@@ -30,7 +30,7 @@ data = data.rename(columns = {'P005001':'tot','P005003':'NHwhite','P005004':'NHb
 data['GEOID10'] = data['state']+data['county']+data['tract']+data['block']  
 
 #save file  
-data.to_csv('/Users/hwheelen/Documents/GitHub/PGP_RapidResponse/Georgia/data/GA2010pop_breakdown.csv')
+data.to_csv('/Users/hwheelen/Desktop/Queens COIs/Blocks/NY2010pop.csv')
 
 
 
